@@ -20,7 +20,7 @@ class WelcomeView: UIView {
         titleLabel.textAlignment = .left
         titleLabel.textColor = Colors.titleBlackcolor
         titleLabel.font = UIFont.systemFont(ofSize: 24)
-        titleLabel.text = NSLocalizedString("CreateWalletSettinglabeltitle", value: "创建钱包!", comment: "")
+        titleLabel.text = R.string.localizable.welcomeCreateWalletButtonTitle() + "!"
         return titleLabel
     }()
 
@@ -42,16 +42,17 @@ class WelcomeView: UIView {
         createWalletField.underLineColor = Colors.textgraycolor
         createWalletField.font = UIFont.init(name: "PingFang SC", size: 12)
         createWalletField.placeholder = NSLocalizedString("CreateWalletSettingWalletName", value: "钱包名称", comment: "")
+        createWalletField.delegate = self
         return createWalletField
     }()
     lazy var passwordField: UnderLineTextFiled = {
         let passwordField = UnderLineTextFiled(frame: .zero)
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         passwordField.font = UIFont.init(name: "PingFang SC", size: 12)
-        passwordField.placeholder =  NSLocalizedString("CreateWalletPassWord", value: "密码", comment: "")
-        //        "密码"
+        passwordField.placeholder =  R.string.localizable.password()
         passwordField.isSecureTextEntry = true
         passwordField.underLineColor = Colors.textgraycolor
+        passwordField.delegate = self
         //
         return passwordField
     }()
@@ -62,6 +63,7 @@ class WelcomeView: UIView {
         repasswordField.font = UIFont.init(name: "PingFang SC", size: 12)
         repasswordField.placeholder = NSLocalizedString("CreateWalletRePassWord", value: "重复密码", comment: "")
         repasswordField.isSecureTextEntry = true
+        repasswordField.delegate = self
         repasswordField.underLineColor = Colors.textgraycolor
         return repasswordField
     }()
@@ -101,7 +103,7 @@ class WelcomeView: UIView {
         createBtn.translatesAutoresizingMaskIntoConstraints = false
         createBtn.backgroundColor = UIColor(hex: "F02E44")
         createBtn.setTitleColor(Colors.fffffgraycolor, for: .normal)
-        createBtn.setTitle(NSLocalizedString("CreateWalletSettingCreateWallet", value: "创建钱包", comment: ""), for: .normal)
+        createBtn.setTitle(R.string.localizable.creatingWallet(), for: .normal)
         createBtn.titleLabel?.font = UIFont.init(name: "PingFang SC", size: 15)
         createBtn.layer.cornerRadius = 5
         createBtn.layer.masksToBounds = true
@@ -115,7 +117,7 @@ class WelcomeView: UIView {
         importBtn.translatesAutoresizingMaskIntoConstraints = false
         importBtn.backgroundColor = UIColor.white
         importBtn.setTitleColor(UIColor(hex: "F02E44"), for: .normal)
-        importBtn.setTitle(NSLocalizedString("CreateWalletSettingImportWallet", value: "导入钱包", comment: ""), for: .normal)
+        importBtn.setTitle(R.string.localizable.welcomeImportWalletButtonTitle(), for: .normal)
         importBtn.titleLabel?.font = UIFont.init(name: "PingFang SC", size: 15)
         importBtn.layer.cornerRadius = 5
         importBtn.layer.masksToBounds = true
@@ -146,22 +148,31 @@ class WelcomeView: UIView {
     @objc func createWalletAction(sender: UIButton) {
         let isEmpty = "".kStringIsEmpty(createWalletField.text ?? "")
         if isEmpty {
-            print("钱包名字为空")
+//            MLErrorType.WalletNameEmptyError.tips(view: self.superview!)
+            MLProgressHud.showError(error: MLErrorType.WalletNameEmptyError as NSError)
+//            print(MLErrorType.WalletNameEmptyError.title)
             return
         }
         let isPassword = "".isPassword(pasword: passwordField.text ?? "")
-
         if !isPassword {
-            print("请输入6-16数字和字母组合组成的密码")
+//            MLErrorType.PasswordformatError.tips(view: self.superview!)
+            MLProgressHud.showError(error: MLErrorType.PasswordformatError as NSError)
+//            print(MLErrorType.PasswordformatError.title)
             return
         }
         if passwordField.text ?? "" != repasswordField.text ?? "" {
-            print("密码前后不想等")
+//            MLErrorType.PasswordNotEqual.tips(view: self.superview!)
+            MLProgressHud.showError(error: MLErrorType.PasswordNotEqual as NSError)
+//            print(MLErrorType.PasswordNotEqual.title)
             return
         }
-
+        if !detailBtn.isSelected {
+//            MLErrorType.ReadProtocolNotRead.tips(view: self.superview!)
+            MLProgressHud.showError(error: MLErrorType.ReadProtocolNotRead as NSError)
+//            print(MLErrorType.ReadProtocolNotRead.title)
+            return
+        }
         let createWalletVM = CreateWalletViewModel(title: createWalletField.text!, password: passwordField.text!)
-
         delegate?.didPressCreateWallet(createWalletViewModel: createWalletVM)
     }
 
@@ -185,7 +196,7 @@ class WelcomeView: UIView {
 
         NSLayoutConstraint.activate([
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 25),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100 - kStatusBarHeight),
             titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -25),
             subtitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 25),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
@@ -243,18 +254,9 @@ class WelcomeView: UIView {
         let attributedString = NSMutableAttributedString.init(string: str, attributes: attrs)
         return attributedString
     }
-
-    func sizeWithText(text: NSString, font: UIFont, size: CGSize) -> CGRect {
-        let attributes = [NSAttributedStringKey.font: font]
-        let option = NSStringDrawingOptions.usesLineFragmentOrigin
-        let rect: CGRect = text.boundingRect(with: size, options: option, attributes: attributes, context: nil)
-        return rect
-
-    }
     func calculationheight() -> CGFloat {
         return  586 + 100
     }
-
     func reset() {
         createWalletField.resignFirstResponder()
         passwordField.resignFirstResponder()

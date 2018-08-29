@@ -15,6 +15,12 @@ import UIKit
 //    return rect.size.height
 //}
 
+func sizeWithText(text: NSString, font: UIFont, size: CGSize) -> CGRect {
+    let attributes = [NSAttributedStringKey.font: font]
+    let option = NSStringDrawingOptions.usesLineFragmentOrigin
+    let rect: CGRect = text.boundingRect(with: size, options: option, attributes: attributes, context: nil)
+    return rect
+}
 //适配 350 375 414       568 667 736
 func kAutoLayoutWidth(_ width: CGFloat) -> CGFloat {
     return width*kScreenW / 375
@@ -37,11 +43,6 @@ func kAutoLayoutHeigth(_ height: CGFloat) -> CGFloat {
 //let KUITabBarHeight: CGFloat = kUI_IPHONEX ? 83 : 49
 ////navigationBarHeight默认高度44 （iPhoneX 88）
 ////tabBarHeight默认高度49     （iPhoneX 83）
-
-
-
-
-
 
 
 

@@ -59,6 +59,12 @@ struct WalletAccountViewModel {
         }
         return .none
     }
+    var isSelect: Bool? {
+        if currentWallet == wallet {
+            return true
+        }
+        return false
+    }
 
     var canDelete: Bool {
         return currentWallet != wallet // || keystore.wallets.count == 1

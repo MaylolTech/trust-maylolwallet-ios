@@ -13,7 +13,10 @@ struct CreateWalletViewModel {
         }
         get {
             if "".kStringIsEmpty(_tittle) {
-                return "New Wallet"
+//                return "New Wallet"
+//                return R.string.localizable.mainWallet()
+                return "MainWallet".localized()
+
             } else {
                 return _tittle!
             }

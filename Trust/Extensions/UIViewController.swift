@@ -11,6 +11,18 @@ enum ConfirmationError: LocalizedError {
 }
 
 extension UIViewController {
+
+    func addRightMenuListBtn() -> UIButton {
+        let rightBtn = UIButton(type: UIButtonType.custom)
+        rightBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        rightBtn.setImage(R.image.ml_wallet_home_btnmenu(), for: UIControlState())
+        rightBtn.addTarget(self, action: #selector(showMenuList), for: UIControlEvents.touchUpInside)
+        return rightBtn
+    }
+
+    @objc func showMenuList() {
+    }
+
     func displayError(error: Error) {
         let alertController = UIAlertController(title: error.prettyError, message: "", preferredStyle: UIAlertControllerStyle.alert)
         alertController.popoverPresentationController?.sourceView = self.view
@@ -24,7 +36,7 @@ extension UIViewController {
         okTitle: String = R.string.localizable.oK(),
         okStyle: UIAlertActionStyle = .default,
         completion: @escaping (Result<Void, ConfirmationError>) -> Void
-    ) {
+        ) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.popoverPresentationController?.sourceView = self.view
         alertController.addAction(UIAlertAction(title: okTitle, style: okStyle, handler: { _ in
@@ -39,7 +51,7 @@ extension UIViewController {
     func displayLoading(
         text: String = String(format: NSLocalizedString("loading.dots", value: "Loading %@", comment: ""), "..."),
         animated: Bool = true
-    ) {
+        ) {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: animated)
         hud.label.text = text
     }

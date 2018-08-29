@@ -289,3 +289,44 @@
 "DeferredDeepLinking" = "Deferred Deep Linking";
 "CrashReports" = "Crash Reports";
 "Confirm signing this message:" = "Confirm signing this message:";
+"setting.multilingual" = "多語言";//"多语言".
+
+"ML.Manager.UnnamedWallet" = "UnnamedWallet";
+"ML.Manager.Wallet" = "ManageThePurse";
+"ML.Setting.cell.MonetaryUnit" = "Monetary Unit";//"货币单位",
+"ML.Setting.cell.Aboutus" = "About Us";//"货币单位",
+"ML.Setting.cell.Aboutus.UseProtocol" = "Use Protocol";//"使用协议"
+"ML.Setting.cell.Aboutus.PrivacyClause" = "Privacy Clause";//"隐私条款"
+"ML.Setting.cell.Aboutus.ProductGuide" = "Product Guide";//"产品向导"
+"ML.Setting.cell.Aboutus.DetectionUpdate" = "Detection Update";//"检测更新"
+"ML.Setting.cell.Aboutus.Currentversion" = "Current Version";//"当前版本"
+"ML.Tokens.cell.Totalassets" = "TotalAssets";//"总资产"
+"ML.Token.copyAddress" = "Duplicate Collection Address";//"复制首款地址"
+"ML.Token.ReceiptCode" = "Receipt Code";//"收款码"
+"ML.Transaction.Recentrecords" = "Recent Transaction Records";//"最近交易记录" //Recent transaction records
+
+"ML.Transaction.cell.tokenTransfer.title" = "Transfer";//转账
+"ML.Transaction.cell.receivables.title" = "Receivables";//收款 Receivables
+"ML.Transaction.cell.PayeeWalletAddress" = "payee wallet address";//收款人钱包地址 Payee wallet address
+"ML.Transaction.cell.TransferAmount" = "transfer amount";//转账金额Transfer amount
+"ML.Transaction.cell.Remarks" = "remarks";//备注 Remarks
+"ML.Transaction.cell.CustomGasPrice" = "Custom Gas Price";//自定义Gas Price   Custom Gas Price
+"ML.Transaction.cell.CustomGas" = "Custom Gas";//自定义Gas  Custom Gas
+"ML.Transaction.cell.Sixteenbinarydata" = "Sixteen binary data";//Sixteen binary data  十六进制数据
+"ML.Transaction.cell.HowToSetParameters" = "How to set parameters？";//如何设置参数 How to set parameters
+"ML.Transaction.cell.Advancedoptions" = "Advanced options";//高级选项 Advanced options
+"ML.Transaction.cell.Pursecipher" = "Purse cipher";//钱包密码 Purse cipher
+"ML.lock.enter.passcode.view.model.initial" = "Enter your passcode";//请输入密码 Enter your passcode
+"ML.Transaction.cell.Sure" = "Sure";//确定 Sure
+"ML.Transaction.cell.Detailsofpayment" = "Details of payment";//支付详情 Details of payment
+"ML.Transaction.cell.Transfertotheaddress" = "Transfer to the address";//转入地址  Transfer to the address
+"ML.Transaction.cell.PaymentPurse" = "Payment Purse";//付款钱包  Payment Purse
+"ML.Transaction.cell.MinerCost" = "Miner's cost";//矿工费用 Miner's cost
+"ML.Transaction.cell.Amountofmoney" = "Amount of money";//金额  Amount of money
+"ML.Transaction.cell.fast" = "fast";//快  fast
+"ML.Transaction.cell.slow" = "slow";//慢  slow
+"MLPrivateIntroduce" = "什么是私钥？";
+"ML.Write.Phrase" = "抄下你的钱包助记词！";
+"ML.Write.PhraseTips" = "助记词用于恢复钱包或重置钱包密码，将他准确的抄写在纸上并存放在只有你知道的安全的地方";
+"wallets.export.alertSheet.detail" = "Export Private Key";
+

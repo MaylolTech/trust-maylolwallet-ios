@@ -111,7 +111,6 @@ class InCoordinator: Coordinator {
         self.navigator = navigator
         self.register(with: navigator)
     }
-
     func start() {
         showTabBar(for: initialWallet)
         checkDevice()
@@ -168,17 +167,17 @@ class InCoordinator: Coordinator {
         walletCoordinator.start()
         addCoordinator(walletCoordinator)
 
-        let settingsCoordinator = SettingsCoordinator(
-            keystore: keystore,
-            session: session,
-            storage: session.transactionsStorage,
-            walletStorage: session.walletStorage,
-            sharedRealm: sharedRealm
-        )
-        settingsCoordinator.rootViewController.tabBarItem = viewModel.settingsBarItem
-        settingsCoordinator.delegate = self
-        settingsCoordinator.start()
-        addCoordinator(settingsCoordinator)
+//        let settingsCoordinator = SettingsCoordinator(
+//            keystore: keystore,
+//            session: session,
+//            storage: session.transactionsStorage,
+//            walletStorage: session.walletStorage,
+//            sharedRealm: sharedRealm
+//        )
+//        settingsCoordinator.rootViewController.tabBarItem = viewModel.settingsBarItem
+//        settingsCoordinator.delegate = self
+//        settingsCoordinator.start()
+//        addCoordinator(settingsCoordinator)
 
 //        tabBarController.viewControllers = [
 ////            browserCoordinator.navigationController.childNavigationController,
@@ -294,6 +293,7 @@ class InCoordinator: Coordinator {
             session: session,
             coinTypeViewModel: viewModel
         )
+        coordinator.delegate = self
         addCoordinator(coordinator)
         nav.pushCoordinator(coordinator: coordinator, animated: true)
 
@@ -359,6 +359,13 @@ extension InCoordinator: SettingsCoordinatorDelegate {
 }
 
 extension InCoordinator: TokensCoordinatorDelegate {
+    func didRestart(with account: WalletInfo, in coordinator: TokensCoordinator) {
+        restart(for: account)
+    }
+
+    func didSelect(wallet: WalletInfo, in coordinator: TokensCoordinator) {
+        restart(for: wallet)
+    }
     func didPressSend(for token: TokenObject, in coordinator: TokensCoordinator) {
         sendFlow(for: token)
     }
@@ -378,6 +385,13 @@ extension InCoordinator: TokensCoordinatorDelegate {
 }
 
 extension InCoordinator: SendCoordinatorDelegate {
+    func didDismiss(coordinator: SendCoordinator) {
+        guard let tokensCoordinator = tokensCoordinator else { return }
+        let nav = tokensCoordinator.navigationController
+        removeCoordinator(coordinator)
+        nav.popViewController(animated: false)
+    }
+
     func didFinish(_ result: Result<ConfirmResult, AnyError>, in coordinator: SendCoordinator) {
         switch result {
         case .success(let confirmResult):
@@ -403,6 +417,18 @@ extension InCoordinator: BrowserCoordinatorDelegate {
 }
 
 extension InCoordinator: WalletsCoordinatorDelegate {
+    func didPresentVC(pushType: MLPushType) {
+
+    }
+
+    func didVDismissView() {
+
+    }
+
+    func didGoSettingVC(pushType: MLPushType) {
+        
+    }
+
     func didUpdateAccounts(in coordinator: WalletsCoordinator) {
         delegate?.didUpdateAccounts(in: self)
     }
@@ -415,5 +441,14 @@ extension InCoordinator: WalletsCoordinatorDelegate {
     func didCancel(in coordinator: WalletsCoordinator) {
         navigationController.dismiss(animated: true)
         // removeCoordinator(coordinator)
+    }
+}
+
+extension InCoordinator: RequestCoordinatorDelegate{
+    func popCoordinator(coordinator: RequestCoordinator) {
+        guard let tokensCoordinator = tokensCoordinator else { return }
+        let nav = tokensCoordinator.navigationController
+        nav.popViewController(animated: false)
+        removeCoordinator(self)
     }
 }

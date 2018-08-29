@@ -108,6 +108,23 @@ struct ConfirmPaymentDetailsViewModel {
         )
     }
 
+    var estimatedMinerCostFormula: String {
+
+        let unit = UnitConfiguration.gasPriceUnit
+        let gasPriceStr = fullFormatter.string(from: transaction.gasPrice, units: UnitConfiguration.gasPriceUnit)
+        let gasStr = self.gasLimit.description
+        return  String(
+            format: "≈Gas(%@)*Gas Price(%@ %@)",
+            gasStr,
+            gasPriceStr,
+            unit.name
+        )
+    }
+    var estimatedMinerCostFormulaWithEth: String {
+        return gasViewModel.etherFee
+    }
+
+
     var amountTextColor: UIColor {
         return Colors.red
     }
@@ -147,7 +164,10 @@ struct ConfirmPaymentDetailsViewModel {
     var amountString: String {
         return amountWithSign(for: amount) + " \(transaction.transfer.type.symbol(server: server))"
     }
-
+    var absoluteAmountString: String {
+        return amount + " \(transaction.transfer.type.symbol(server: server))"
+    }
+    
     var monetaryAmountString: String? {
         return monetaryAmountViewModel.amountText
     }

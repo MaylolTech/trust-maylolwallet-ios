@@ -48,7 +48,7 @@ final class TokenHeaderView: UIView {
             bottomOffset: 5
         )
         footerView.translatesAutoresizingMaskIntoConstraints = false
-        footerView.setBottomBorder()
+//        footerView.setBottomBorder()
         return footerView
     }()
 

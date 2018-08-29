@@ -288,22 +288,65 @@
 "DeferredDeepLinking" = "Deferred Deep Linking";
 "CrashReports" = "Crash Reports";
 "Confirm signing this message:" = "Confirm signing this message:";
-
-#"CreateWalletSettinglabeltitle" = "Creating Wallet!";
-"CreateWalletSettinglabeltitle" = "创建钱包!";
-#"CreateWalletSettinglabelsubtitle" = "·Passwords are used to protect private key transactions and trading authorization, The intensity is very important\n·We do not store passwords, nor can we help you find them, Please bear in mind";
-"CreateWalletSettinglabelsubtitle" = "·密码用于保护私钥交易合交易授权，强度非常重要\n·我们不存储密码，也无法帮您找回，请务必牢记";
-
-"CreateWalletSettingServicePrivacyClause" = "服务隐私条款";
-
-"CreateWalletSettingWalletName" = "钱包名称";
-
-"CreateWalletPassWord" = "密码";
-
-"CreateWalletRePassWord" = "重复密码";
-
-"CreateWalletSettingServicePrivacyClause1" = "我已经仔细阅读并同意";
-
-"CreateWalletSettingCreateWallet" = "创建钱包";
-
-"CreateWalletSettingImportWallet" = "导入钱包";
+//
+//#"CreateWalletSettinglabeltitle" = "Creating Wallet!";
+//"CreateWalletSettinglabeltitle" = "创建钱包!";
+//#"CreateWalletSettinglabelsubtitle" = "·Passwords are used to protect private key transactions and trading authorization, The intensity is very important\n·We do not store passwords, nor can we help you find them, Please bear in mind";
+//"CreateWalletSettinglabelsubtitle" = "·密码用于保护私钥交易合交易授权，强度非常重要\n·我们不存储密码，也无法帮您找回，请务必牢记";
+//
+//"CreateWalletSettingServicePrivacyClause" = "服务隐私条款";
+//
+//"CreateWalletSettingWalletName" = "钱包名称";
+//
+//"CreateWalletPassWord" = "密码";
+//
+//"CreateWalletRePassWord" = "重复密码";
+//
+//"CreateWalletSettingServicePrivacyClause1" = "我已经仔细阅读并同意";
+//
+//"CreateWalletSettingCreateWallet" = "创建钱包";
+//
+//"CreateWalletSettingImportWallet" = "导入钱包";
+//
+//"MLPrivateIntroduce" = "什么是私钥？";
+//"MLPhraseIntroduce" = "什么是助记词？";
+//"ML.Write.Phrase" = "抄下你的钱包助记词！";
+//"ML.Write.PhraseTips" = "助记词用于恢复钱包或重置钱包密码，将他准确的抄写在纸上并存放在只有你知道的安全的地方";
+"ML.Manager.UnnamedWallet" = "未命名钱包";
+"ML.Manager.Wallet" = "管理钱包";
+"setting.multilingual" = "多语言";//多语言
+"ML.Setting.cell.MonetaryUnit" = "货币单位";//"货币单位",
+"ML.Setting.cell.Aboutus" = "关于我们";//"关于我们",
+"ML.Setting.cell.Aboutus.UseProtocol" = "使用协议";//"使用协议"
+"ML.Setting.cell.Aboutus.PrivacyClause" = "隐私条款";//"隐私条款"
+"ML.Setting.cell.Aboutus.ProductGuide" = "产品向导";//"产品向导"
+"ML.Setting.cell.Aboutus.DetectionUpdate" = "检测更新";//"检测更新"
+"ML.Setting.cell.Aboutus.Currentversion" = "当前版本";//"当前版本"
+"ML.Tokens.cell.Totalassets" = "总资产";//"总资产"
+"ML.Token.copyAddress" = "复制收款地址";//"复制首款地址"
+"ML.Token.ReceiptCode" = "收款码";//"收款码"
+"ML.Transaction.Recentrecords" = "最近交易记录";//"最近交易记录" //Recent transaction records
+"ML.Transaction.Packing.Wait" = "等待打包";//"等待打包" //Wait for packing
+"ML.Transaction.Packing.Failure" = "打包失败";//"等待打包" //Packaging failure
+"ML.Transaction.Packing.Success" = "打包成功";//"打包成功" //Packaging success
+"ML.Transaction.cell.tokenTransfer.title" = "转账";//转账
+"ML.Transaction.cell.receivables.title" = "收款";//收款 Receivables
+"ML.Transaction.cell.PayeeWalletAddress" = "收款人钱包地址";//收款人钱包地址 Payee wallet address
+"ML.Transaction.cell.TransferAmount" = "转账金额";//转账金额Transfer amount
+"ML.Transaction.cell.Remarks" = "备注";//备注 Remarks
+"ML.Transaction.cell.CustomGasPrice" = "自定义Gas Price";//自定义Gas Price   Custom Gas Price
+"ML.Transaction.cell.CustomGas" = "自定义Gas";//自定义Gas  Custom Gas
+"ML.Transaction.cell.Sixteenbinarydata" = "十六进制数据";//Sixteen binary data  十六进制数据
+"ML.Transaction.cell.HowToSetParameters" = "如何设置参数？";//如何设置参数 How to set parameters
+"ML.Transaction.cell.Advancedoptions" = "高级选项";//高级选项 Advanced options
+"ML.Transaction.cell.Pursecipher" = "钱包密码";//钱包密码 Purse cipher
+"ML.lock.enter.passcode.view.model.initial" = "请输入密码"; //请输入密码 Enter your passcode
+"ML.Transaction.cell.Sure" = "确定";//确定 Sure
+"ML.Transaction.cell.Detailsofpayment" = "支付详情";//支付详情 Details of payment
+"ML.Transaction.cell.Transfertotheaddress" = "转入地址";//转入地址  Transfer to the address
+"ML.Transaction.cell.PaymentPurse" = "付款钱包";//付款钱包  Payment Purse
+"ML.Transaction.cell.MinerCost" = "矿工费用";//矿工费用 Miner's cost
+"ML.Transaction.cell.Amountofmoney" = "金额";//金额  Amount of money
+"ML.Transaction.cell.fast" = "快";//快  fast
+"ML.Transaction.cell.slow" = "慢";//慢  slow
+"wallets.export.alertSheet.detail" = "Export Private Key";

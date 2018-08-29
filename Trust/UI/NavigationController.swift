@@ -69,19 +69,25 @@ public class NavigationController: UIViewController {
 
         childNavigationController.delegate = self
         childNavigationController.interactivePopGestureRecognizer?.delegate = self
-
         addChildViewController(childNavigationController)
         view.addSubview(childNavigationController.view)
         childNavigationController.didMove(toParentViewController: self)
 
         childNavigationController.view.translatesAutoresizingMaskIntoConstraints = false
-
+        setNavigationStyle()
         NSLayoutConstraint.activate([
             childNavigationController.view.topAnchor.constraint(equalTo: view.topAnchor),
             childNavigationController.view.leftAnchor.constraint(equalTo: view.leftAnchor),
             childNavigationController.view.rightAnchor.constraint(equalTo: view.rightAnchor),
             childNavigationController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+
+    func setNavigationStyle() {
+//        childNavigationController.navigationBar.tintColor = Colors.black
+        childNavigationController.navigationBar.barTintColor = UIColor.white
+        childNavigationController.navigationBar.shadowImage = UIImage()
+//        childNavigationController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: R.image.ml_wallet_btn_return(), style: .plain, target: self, action: #selector(dismiss(animated:completion:)))
     }
 
     // MARK: - Public
@@ -137,7 +143,8 @@ public class NavigationController: UIViewController {
         {
             preferredStyle = .default
         } else {
-            preferredStyle = .lightContent
+            preferredStyle = .default
+//            preferredStyle = .lightContent
         }
         return preferredStyle
     }

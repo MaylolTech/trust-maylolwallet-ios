@@ -11,6 +11,13 @@ enum SendViewType {
     case amount
 }
 
+
+enum SendPriseType {
+    case Min
+    case Max
+    case Default
+}
+
 struct SendViewModel {
     /// stringFormatter of a `SendViewModel` to represent string values with respect of the curent locale.
     lazy var stringFormatter: StringFormatter = {
@@ -53,7 +60,7 @@ struct SendViewModel {
         chainState: ChainState,
         storage: TokensDataStore,
         balance: Balance?
-    ) {
+        ) {
         self.transfer = transfer
         self.config = config
         self.chainState = chainState
@@ -171,5 +178,56 @@ struct SendViewModel {
     /// If ther is need to show max button.
     mutating func isMaxButtonHidden() -> Bool {
         return currentPair.left != symbol
+    }
+
+    //    func gasLimitWithTransferType(type: TransferType) -> BigInt {
+    //        switch type {
+    //        case .ether:
+    //            return GasLimitConfiguration.default
+    //        case .token:
+    //            return GasLimitConfiguration.tokenTransfer
+    //        case .dapp:
+    //            return GasLimitConfiguration.dappTransfer
+    //        }
+    //    }
+    //
+    //    func gasLimit(type : SendPriseType) -> BigInt {
+    //        switch type {
+    //        case .Min:
+    //            return GasLimitConfiguration.min
+    //        case .Max:
+    //            return GasLimitConfiguration.max
+    //        case .Default:
+    //            return GasLimitConfiguration.default
+    //        }
+    //        return GasLimitConfiguration.default
+    //    }
+    //
+    //
+    //    func gasPrise(type : SendPriseType) -> BigInt {
+    //        switch type {
+    //        case .Min:
+    //            return GasPriceConfiguration.min
+    //        case .Max:
+    //            return GasPriceConfiguration.max
+    //        case .Default:
+    //            return GasPriceConfiguration.default
+    //        }
+    //       return GasPriceConfiguration.default
+    //    }
+    func gasLimitPu(type : SendPriseType) -> BigInt {
+        let calculatedGasLimit = SendViewModel.gasLimit(for:  self.transfer.type)
+        return calculatedGasLimit
+    }
+    
+    private static func gasLimit(for type: TransferType) -> BigInt {
+        switch type {
+        case .ether:
+            return GasLimitConfiguration.default
+        case .token:
+            return GasLimitConfiguration.tokenTransfer
+        case .dapp:
+            return GasLimitConfiguration.dappTransfer
+        }
     }
 }

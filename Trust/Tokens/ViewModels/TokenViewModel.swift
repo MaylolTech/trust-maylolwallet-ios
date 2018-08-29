@@ -66,6 +66,23 @@ final class TokenViewModel {
         )
     }
 
+    var amountCountString: String {
+        return String(
+            format: "%@",
+            shortFormatter.string(from: BigInt(token.value) ?? BigInt(), decimals: token.decimals)
+        )
+    }
+
+    var feelPrise: String {
+        let count = Double(shortFormatter.string(from: BigInt(token.value) ?? BigInt(), decimals: token.decimals))
+        guard marketPrice != nil else {
+            return "0"
+        }
+        let priseStr = (ticker?.price)!
+        let simplePrise: Double = Double(priseStr)!
+        return NSString(format: "%.f", count! * simplePrise) as String
+    }
+
     var numberOfSections: Int {
         return tokenTransactionSections.count
     }
@@ -178,6 +195,46 @@ final class TokenViewModel {
             self?.updateSections()
             completion()
         }
+    }
+
+    func getModel() {
+        let dataArr1:[String] = NSDate().latelyEightTimeInt() as! [String]
+
+        print(dataArr1)
+
+        let dataArr:[String] = NSDate().latelyEightTime() as! [String]
+
+        var dateDic:NSMutableDictionary = NSMutableDictionary()
+        for dateStr in dataArr {
+            let currentDateArr = NSMutableArray()
+            dateDic.setObject(currentDateArr, forKey: dateStr as NSCopying)
+        }
+        var data: [String] = []
+        for tranSections: TransactionSection in tokenTransactionSections {
+            data.append(tranSections.title)
+            for dateStr in dataArr {
+                if (dateStr == tranSections.title){
+                    let arr: NSMutableArray = dateDic.object(forKey: dateStr) as! NSMutableArray
+                    arr.add(tranSections)
+                    dateDic.setObject(arr, forKey: dateStr as NSCopying)
+                }
+            }
+        }
+
+        //数量
+//        let value = shortValue
+//        return amountWithSign(for: value.amount) + " " + value.symbol
+        //价值
+        //时间
+
+        print(dateDic)
+
+
+//        print(dataArr)
+
+//        data: ["8月 29 2018", "8月 27 2018", "8月 26 2018", "8月 24 2018", "8月 23 2018", "8月 22 2018", "8月 21 2018", "8月 16 2018", "8月 5 2018", "7月 19 2018", "6月 29 2018", "6月 14 2018", "6月 4 2018", "5月 10 2018"]
+//        ()
+//        print("data:",data)
     }
 
     func numberOfItems(for section: Int) -> Int {

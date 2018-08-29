@@ -25,6 +25,29 @@ final class TokensViewModel: NSObject {
         return amount ?? "0.00"
     }
 
+    var headerAttributeBalance: NSMutableAttributedString {
+
+        var unt = headerBalance.substring(to: 1)
+        var prise = headerBalance.substring(from: 1)
+        if unt == "C" {
+            unt = "¥"
+            prise = headerBalance.substring(from: 3)
+        }else if unt == "U" {
+            unt = "$"
+            prise = headerBalance.substring(from: 3)
+        }
+
+        let str = NSLocalizedString("ML.Tokens.cell.Totalassets", value: "TotalAssets", comment: "") + "("+"\(unt)"+")≈  "
+        let attstr = NSMutableAttributedString(string: str)
+        attstr.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),NSAttributedStringKey.strokeColor : Colors.titleBlackcolor], range: NSRange(location: 0, length: str.length))
+
+
+        let attstr2 = NSMutableAttributedString(string: prise)
+        attstr2.addAttributes([NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 27),NSAttributedStringKey.strokeColor : Colors.titleBlackcolor], range: NSRange(location: 0, length: prise.length))
+        attstr.append(attstr2)
+        return attstr
+    }
+
     var headerBalanceTextColor: UIColor {
         return Colors.black
     }
@@ -32,6 +55,11 @@ final class TokensViewModel: NSObject {
     var headerBackgroundColor: UIColor {
         return Colors.veryVeryLightGray
     }
+
+//    var getHeaderFormData: Results<TokenObject>{
+//
+//        return
+//    }
 
     var headerBalanceFont: UIFont {
         return UIFont.systemFont(ofSize: 28, weight: .medium)

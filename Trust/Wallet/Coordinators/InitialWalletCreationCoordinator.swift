@@ -23,7 +23,7 @@ final class InitialWalletCreationCoordinator: Coordinator {
         navigationController: NavigationController = NavigationController(),
         keystore: Keystore,
         entryPoint: WalletEntryPoint
-    ) {
+        ) {
         self.navigationController = navigationController
         self.keystore = keystore
         self.entryPoint = entryPoint
@@ -31,8 +31,10 @@ final class InitialWalletCreationCoordinator: Coordinator {
 
     func start() {
         switch entryPoint {
-        case .createInstantWallet, .welcome:
+        case .welcome:
             showCreateWallet()
+        case .createInstantWallet:
+            presentCreateWallet()
         case .importWallet:
             presentImportWallet()
         }
@@ -47,6 +49,13 @@ final class InitialWalletCreationCoordinator: Coordinator {
         coordinator.delegate = self
         coordinator.setCreateWallet(createWalletViewModel: self.createWalletViewModel)
         coordinator.start(.createInstantWallet)
+        addCoordinator(coordinator)
+    }
+    func presentCreateWallet() {
+        let coordinator = WalletCoordinator(keystore: keystore)
+        coordinator.delegate = self
+        coordinator.start(.createInstantWallet)
+        navigationController.present(coordinator.navigationController, animated: true, completion: nil)
         addCoordinator(coordinator)
     }
 

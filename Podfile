@@ -31,6 +31,8 @@ target 'Trust' do
   pod 'URLNavigator'
   pod 'TrustWalletSDK', :git=>'https://github.com/TrustWallet/TrustSDK-iOS', :branch=>'master'
   pod 'TrezorCrypto', :podspec => 'https://github.com/solrex/trezor-crypto-ios/raw/master/TrezorCrypto.podspec'
+  pod 'IBAnimatable'
+  pod 'Localize-Swift'
 
   target 'TrustTests' do
     inherit! :search_paths

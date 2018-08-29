@@ -23,15 +23,27 @@ final class SettingsCoordinator: Coordinator {
     let pushNotificationsRegistrar = PushNotificationsRegistrar()
     var coordinators: [Coordinator] = []
 
-    lazy var rootViewController: SettingsViewController = {
-        let controller = SettingsViewController(
-            session: session,
-            keystore: keystore
-        )
+//    lazy var rootViewController: SettingsViewController = {
+//        let controller = SettingsViewController(
+//            session: session,
+//            keystore: keystore
+//        )
+//        controller.delegate = self
+//        controller.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: addLeftReturnBtn())
+//        controller.modalPresentationStyle = .pageSheet
+//        return controller
+//    }()
+
+    lazy var rootViewController: MLSettingsViewController = {
+        let controller = MLSettingsViewController()
+//        controller.modalPresentationStyle = .pageSheet
         controller.delegate = self
-        controller.modalPresentationStyle = .pageSheet
+        controller.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: addLeftReturnBtn())
         return controller
     }()
+
+
+
     let sharedRealm: Realm
     private lazy var historyStore: HistoryStore = {
         return HistoryStore(realm: sharedRealm)
@@ -54,10 +66,26 @@ final class SettingsCoordinator: Coordinator {
         self.sharedRealm = sharedRealm
     }
 
-    func start() {
-        navigationController.viewControllers = [rootViewController]
+    func addLeftReturnBtn() -> UIButton {
+        let leftBtn = UIButton(type: UIButtonType.custom)
+        leftBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        leftBtn.setImage(R.image.ml_wallet_btn_return(), for: UIControlState())
+        leftBtn.addTarget(self, action: #selector(dismissViewController), for: UIControlEvents.touchUpInside)
+        return leftBtn
     }
 
+    @objc func dismissViewController() {
+        delegate?.didCancel(in: self)
+    }
+
+    func start() {
+        navigationController.viewControllers = [rootViewController]
+//        presentSettingViewController()
+    }
+
+    func presentSettingViewController() {
+        navigationController.pushViewController(rootViewController, animated: false)
+    }
     func restart(for wallet: WalletInfo) {
         delegate?.didRestart(with: wallet, in: self)
     }
@@ -74,6 +102,22 @@ final class SettingsCoordinator: Coordinator {
         let coordinator = WalletsCoordinator(keystore: keystore, navigationController: navigationController)
         coordinator.delegate = self
         navigationController.pushCoordinator(coordinator: coordinator, animated: true)
+    }
+    func settingAction(action: MLPushType, in viewController: UIViewController) {
+        switch action {
+        case .AboutUs:
+            let controller = MLAboutUsViewController()
+            controller.delegate = self
+            navigationController.pushViewController(controller, animated: false)
+        case .Unit:
+            session.tokensStorage.clearBalance()
+            restart(for: session.account)
+        case .MutiLanguage:
+            session.tokensStorage.clearBalance()
+            restart(for: session.account)
+        default:
+            break
+        }
     }
 }
 
@@ -111,6 +155,18 @@ extension SettingsCoordinator: SettingsViewControllerDelegate {
 }
 
 extension SettingsCoordinator: WalletsCoordinatorDelegate {
+    func didPresentVC(pushType: MLPushType) {
+
+    }
+
+    func didVDismissView() {
+
+    }
+
+    func didGoSettingVC(pushType: MLPushType) {
+     
+    }
+
     func didCancel(in coordinator: WalletsCoordinator) {
         coordinator.navigationController.dismiss(animated: true)
     }
@@ -123,5 +179,17 @@ extension SettingsCoordinator: WalletsCoordinatorDelegate {
     func didSelect(wallet: WalletInfo, in coordinator: WalletsCoordinator) {
         coordinator.navigationController.removeChildCoordinators()
         delegate?.didRestart(with: wallet, in: self)
+    }
+}
+
+extension SettingsCoordinator: MLSettingsViewControllerDelegate {
+    func didAction(action: MLPushType, in viewController: MLSettingsViewController) {
+        settingAction(action: action, in: viewController)
+    }
+}
+
+extension SettingsCoordinator: MLAboutUsViewControllerDelegate {
+    func didAction(action: MLPushType, in viewController: MLAboutUsViewController) {
+        settingAction(action: action, in: viewController)
     }
 }

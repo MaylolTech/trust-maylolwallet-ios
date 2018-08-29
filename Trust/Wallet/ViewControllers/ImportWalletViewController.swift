@@ -282,16 +282,3 @@ extension ImportWalletViewController: QRCodeReaderDelegate {
     }
 }
 
-extension WalletInfo {
-    static var emptyName: String {
-        return "Unnamed " + R.string.localizable.wallet()
-    }
-
-    static func initialName(index numberOfWallets: Int) -> String {
-        if numberOfWallets == 0 {
-            return R.string.localizable.mainWallet()
-        }
-        return String(format: "%@ %@", R.string.localizable.wallet(), "\(numberOfWallets + 1)"
-        )
-    }
-}

@@ -10,16 +10,16 @@ func applyStyle() {
     } else {
         UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).isTranslucent = false
     }
-    UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).tintColor = AppGlobalStyle.navigationBarTintColor
-    UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).barTintColor = AppGlobalStyle.barTintColor
+//    UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).tintColor = AppGlobalStyle.navigationBarTintColor
+//    UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).barTintColor = AppGlobalStyle.barTintColor
 
-    UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).titleTextAttributes = [
-        .foregroundColor: UIColor.white,
-    ]
+//    UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self]).titleTextAttributes = [
+//        .foregroundColor: UIColor.white,
+//    ]
 
-    UITextField.appearance().tintColor = Colors.blue
+//    UITextField.appearance().tintColor = Colors.blue
 
-    UIImageView.appearance().tintColor = Colors.lightBlue
+//    UIImageView.appearance().tintColor = Colors.lightBlue
 
     BrowserNavigationBar.appearance().setBackgroundImage(.filled(with: .white), for: .default)
 }
@@ -31,7 +31,7 @@ struct AppGlobalStyle {
 }
 
 struct StyleLayout {
-    static let sideMargin: CGFloat = 15
+    static let sideMargin: CGFloat = 14
     static let sideCellMargin: CGFloat = 10
 
     struct TableView {

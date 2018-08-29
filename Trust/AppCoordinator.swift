@@ -12,6 +12,11 @@ class AppCoordinator: NSObject, Coordinator {
         controller.delegate = self
         return controller
     }()
+    lazy var tokensHomeViewController: MLTokensHomeViewController = {
+        let controller = MLTokensHomeViewController()
+        controller.delegate = self
+        return controller
+    }()
     let pushNotificationRegistrar = PushNotificationsRegistrar()
     private let lock = Lock()
     private var keystore: Keystore
@@ -43,13 +48,13 @@ class AppCoordinator: NSObject, Coordinator {
         appTracker.start()
         handleNotifications()
         applyStyle()
-        resetToWelcomeScreen()
+        resetToTokensHomeVC()
 
-        if keystore.hasWallets {
+        if keystore.hasWallets {//本地有钱包
             let wallet = keystore.recentlyUsedWallet ?? keystore.wallets.first!
             showTransactions(for: wallet)
-        } else {
-            resetToWelcomeScreen()
+        } else {//本地无钱包
+            resetToTokensHomeVC()
         }
         pushNotificationRegistrar.reRegister()
 
@@ -131,6 +136,11 @@ class AppCoordinator: NSObject, Coordinator {
         navigationController.viewControllers = [welcomeViewController]
     }
 
+    func resetToTokensHomeVC() {
+        navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.viewControllers = [tokensHomeViewController]
+    }
+
     @objc func reset() {
         lock.deletePasscode()
         pushNotificationRegistrar.unregister()
@@ -161,17 +171,17 @@ class AppCoordinator: NSObject, Coordinator {
         return result
     }
 
-    func showInitialWalletCoordinator(entryPoint: WalletEntryPoint, createWalletViewModel: CreateWalletViewModel) {
-        let coordinator = InitialWalletCreationCoordinator(
-            navigationController: navigationController,
-            keystore: keystore,
-            entryPoint: entryPoint
-        )
-        coordinator.setCreateWallet(createWalletViewModel: createWalletViewModel)
-        coordinator.delegate = self
-        coordinator.start()
-        addCoordinator(coordinator)
-    }
+//    func showInitialWalletCoordinator(entryPoint: WalletEntryPoint, createWalletViewModel: CreateWalletViewModel) {
+//        let coordinator = InitialWalletCreationCoordinator(
+//            navigationController: navigationController,
+//            keystore: keystore,
+//            entryPoint: entryPoint
+//        )
+//        coordinator.setCreateWallet(createWalletViewModel: createWalletViewModel)
+//        coordinator.delegate = self
+//        coordinator.start()
+//        addCoordinator(coordinator)
+//    }
     func showInitialWalletCoordinator(entryPoint: WalletEntryPoint) {
         let coordinator = InitialWalletCreationCoordinator(
             navigationController: navigationController,
@@ -186,11 +196,11 @@ class AppCoordinator: NSObject, Coordinator {
 
 extension AppCoordinator: WelcomeViewControllerDelegate {
     func didPressCreateWallet(in viewController: WelcomeViewController, createWalletViewModel: CreateWalletViewModel) {
-        showInitialWalletCoordinator(entryPoint: .createInstantWallet,createWalletViewModel: createWalletViewModel)
+//        showInitialWalletCoordinator(entryPoint: .createInstantWallet,createWalletViewModel: createWalletViewModel)
     }
 
     func didPressImportWallet(in viewController: WelcomeViewController) {
-        showInitialWalletCoordinator(entryPoint: .importWallet)
+//        showInitialWalletCoordinator(entryPoint: .importWallet)
     }
 }
 
@@ -216,5 +226,15 @@ extension AppCoordinator: InCoordinatorDelegate {
 
     func didUpdateAccounts(in coordinator: InCoordinator) {
         pushNotificationRegistrar.reRegister()
+    }
+}
+
+extension AppCoordinator: MLTokensHomeViewControllerDelegate {
+    func didPressCreateWallet(in viewController: MLTokensHomeViewController) {
+          showInitialWalletCoordinator(entryPoint: .createInstantWallet)
+    }
+
+    func didPressImportWallet(in viewController: MLTokensHomeViewController) {
+        showInitialWalletCoordinator(entryPoint: .importWallet)
     }
 }

@@ -149,7 +149,7 @@ extension String {
 
     func isPassword(pasword : String) -> Bool {
 
-        let pwd =  "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$"
+        let pwd =  "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$"
 
         let regextestpwd = NSPredicate(format: "SELF MATCHES %@",pwd)
 

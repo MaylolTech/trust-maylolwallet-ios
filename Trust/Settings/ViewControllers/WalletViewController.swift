@@ -26,11 +26,11 @@ class WalletViewController: UIViewController {
         }
         return segmentedControl
     }()
-    var tokensViewController: TokensViewController
+    var tokensViewController: MLTokensViewController
     var nonFungibleTokensViewController: NonFungibleTokensViewController
 
     init(
-        tokensViewController: TokensViewController,
+        tokensViewController: MLTokensViewController,
         nonFungibleTokensViewController: NonFungibleTokensViewController
     ) {
         self.tokensViewController = tokensViewController
@@ -42,6 +42,8 @@ class WalletViewController: UIViewController {
         super.viewDidLoad()
 //        self.navigationItem.titleView = segmentController
         setupView()
+//        ml_wallet_home_btnmenu
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: R.image.ml_wallet_home_btnmenu(), style: .plain, target: self, action: #selector(showMenuList))
     }
 
     private func setupView() {
@@ -51,6 +53,7 @@ class WalletViewController: UIViewController {
     private func updateView() {
         showBarButtonItems()
         add(asChildViewController: tokensViewController)
+//          self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: R.image.ml_wallet_btn_return(), style: .plain, target: self, action: #selector(dismiss(animated:completion:)))
 //        if segmentController.selectedSegmentIndex == DetailsViewType.tokens.rawValue {
 //            showBarButtonItems()
 //            remove(asChildViewController: nonFungibleTokensViewController)
@@ -62,22 +65,26 @@ class WalletViewController: UIViewController {
 //        }
     }
 
+//    @objc func showMenuList() {
+//
+//    }
+
     @objc func selectionDidChange(_ sender: UISegmentedControl) {
         updateView()
     }
 
     private func showBarButtonItems() {
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-        self.navigationItem.rightBarButtonItem?.isEnabled = true
-        self.navigationItem.leftBarButtonItem?.isEnabled = true
+//        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+//        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+//        self.navigationItem.rightBarButtonItem?.isEnabled = true
+//        self.navigationItem.leftBarButtonItem?.isEnabled = true
     }
 
     private func hideBarButtonItems() {
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-        self.navigationItem.leftBarButtonItem?.isEnabled = false
+//        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.clear
+//        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.clear
+//        self.navigationItem.rightBarButtonItem?.isEnabled = false
+//        self.navigationItem.leftBarButtonItem?.isEnabled = false
     }
 
     required init?(coder aDecoder: NSCoder) {

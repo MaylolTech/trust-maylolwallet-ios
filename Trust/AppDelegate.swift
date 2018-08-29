@@ -3,6 +3,7 @@
 import UIKit
 import Branch
 import RealmSwift
+import Localize_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -14,6 +15,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }()
     let urlNavigatorCoordinator = URLNavigatorCoordinator()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
+//        window = UIWindow(frame: UIScreen.main.bounds)
+//
+//        let sharedMigration = SharedMigrationInitializer()
+//        sharedMigration.perform()
+//        let realm = try! Realm(configuration: sharedMigration.config)
+//        let walletStorage = WalletStorage(realm: realm)
+//        let keystore = EtherKeystore(storage: walletStorage)
+//
+//        coordinator = AppCoordinator(window: window!, keystore: keystore, navigator: urlNavigatorCoordinator)
+//        coordinator.start()
+        updateUI()
+        if !UIApplication.shared.isProtectedDataAvailable {
+            fatalError()
+        }
+
+        protectionCoordinator.didFinishLaunchingWithOptions()
+        urlNavigatorCoordinator.branch.didFinishLaunchingWithOptions(launchOptions: launchOptions)
+        return true
+    }
+
+    @objc func updateUI() {
+        NSLog("%@", "Disable".localized())
         window = UIWindow(frame: UIScreen.main.bounds)
 
         let sharedMigration = SharedMigrationInitializer()
@@ -24,14 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
         coordinator = AppCoordinator(window: window!, keystore: keystore, navigator: urlNavigatorCoordinator)
         coordinator.start()
-
-        if !UIApplication.shared.isProtectedDataAvailable {
-            fatalError()
-        }
-
-        protectionCoordinator.didFinishLaunchingWithOptions()
-        urlNavigatorCoordinator.branch.didFinishLaunchingWithOptions(launchOptions: launchOptions)
-        return true
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

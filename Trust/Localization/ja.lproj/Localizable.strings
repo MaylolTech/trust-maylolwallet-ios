@@ -288,3 +288,41 @@
 "DeferredDeepLinking" = "ディファードディープリンク";
 "CrashReports" = "クラッシュレポート";
 "Confirm signing this message:" = "Confirm signing this message:";
+"wallets.export.alertSheet.detail" = "Export Private Key";
+"setting.multilingual" = "多言語";//"多语言".
+"ML.Manager.Wallet" = "財布の管理";
+
+"ML.Manager.UnnamedWallet" = "無名の財布";
+
+"ML.Setting.cell.MonetaryUnit" = "通貨単位";//"货币单位",화폐 단위
+"ML.Setting.cell.Aboutus" = "アバウトアス";//"货币单位",
+"ML.Setting.cell.Aboutus.UseProtocol" = "使用プロトコル";//"使用协议"
+"ML.Setting.cell.Aboutus.PrivacyClause" = "プライバシー条項";//"隐私条款"
+"ML.Setting.cell.Aboutus.ProductGuide" = "製品ガイド";//"产品向导"
+"ML.Setting.cell.Aboutus.DetectionUpdate" = "検出更新";//"检测更新"
+"ML.Setting.cell.Aboutus.Currentversion" = "現在のバージョン";//"当前版本"
+"ML.Tokens.cell.Totalassets" = "総資産";//"总资产"
+"ML.Token.copyAddress" = "アドレスをコピーする";//"复制首款地址"
+"ML.Token.ReceiptCode" = "入金コード";//"收款码"
+"ML.Transaction.Recentrecords" = "最近の取引記録";//"最近交易记录" //Recent transaction records
+
+"ML.Transaction.cell.tokenTransfer.title" = "振替";//转账
+"ML.Transaction.cell.receivables.title" = "受取をする";//收款 Receivables
+"ML.Transaction.cell.PayeeWalletAddress" = "受取人の財布の住所";//收款人钱包地址 Payee wallet address
+"ML.Transaction.cell.TransferAmount" = "振替金額";//转账金额Transfer amount
+"ML.Transaction.cell.Remarks" = "備考";//备注 Remarks
+"ML.Transaction.cell.CustomGasPrice" = "カスタム Gas Price";//自定义Gas Price   Custom Gas Price
+"ML.Transaction.cell.CustomGas" = "カスタム Gas";//自定义Gas  Custom Gas
+"ML.Transaction.cell.Sixteenbinarydata" = "16進法データ";//Sixteen binary data  十六进制数据
+"ML.Transaction.cell.HowToSetParameters" = "パラメータをどのように設定するか？";//如何设置参数 How to set parameters
+"ML.Transaction.cell.Advancedoptions" = "高級なオプション";//高级选项 Advanced options
+"ML.Transaction.cell.Pursecipher" = "お財布のパスワード";//钱包密码 Purse cipher
+"ML.lock.enter.passcode.view.model.initial" = "パスワードを入力してください";//请输入密码 Enter your passcode
+"ML.Transaction.cell.Sure" = "確定する";//确定 Sure
+"ML.Transaction.cell.Detailsofpayment" = "詳細を支払う";//支付详情 Details of payment
+"ML.Transaction.cell.Transfertotheaddress" = "住所に転入する";//转入地址  Transfer to the address
+"ML.Transaction.cell.PaymentPurse" = "金を払う";//付款钱包  Payment Purse
+"ML.Transaction.cell.MinerCost" = "鉱夫費用";//矿工费用 Miner's cost
+"ML.Transaction.cell.Amountofmoney" = "金額";//金额  Amount of money
+"ML.Transaction.cell.fast" = "速い";//快  fast
+"ML.Transaction.cell.slow" = "遅い";//慢  slow

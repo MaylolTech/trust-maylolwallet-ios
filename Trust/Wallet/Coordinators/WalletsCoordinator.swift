@@ -8,6 +8,9 @@ protocol WalletsCoordinatorDelegate: class {
     func didSelect(wallet: WalletInfo, in coordinator: WalletsCoordinator)
     func didCancel(in coordinator: WalletsCoordinator)
     func didUpdateAccounts(in coordinator: WalletsCoordinator)
+//    func didPresentVC(pushType: MLPushType)
+//    func didVDismissView()
+//    func didGoSettingVC(pushType: MLPushType)
 }
 
 class WalletsCoordinator: RootCoordinator {
@@ -21,18 +24,23 @@ class WalletsCoordinator: RootCoordinator {
         return walletController
     }()
 
-    lazy var walletController: WalletsViewController = {
-        let controller = WalletsViewController(keystore: keystore)
-//        controller.navigationItem.leftBarButtonItem = UIBarButtonItem(
-//            barButtonSystemItem: .done,
-//            target: self,
-//            action: #selector(dismiss)
-//        )
+//    lazy var walletController: WalletsViewController = {
+//        let controller = WalletsViewController(keystore: keystore)
+////        controller.navigationItem.leftBarButtonItem = UIBarButtonItem(
+////            barButtonSystemItem: .done,
+////            target: self,
+////            action: #selector(dismiss)
+////        )
+//        controller.delegate = self
+//        controller.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
+//        return controller
+//    }()
+
+    lazy var walletController: MLManagerWalletViewController = {
+        let controller = MLManagerWalletViewController(keystore: keystore)
         controller.delegate = self
-        controller.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
         return controller
     }()
-
     init(
         keystore: Keystore,
         navigationController: NavigationController = NavigationController()
@@ -188,5 +196,36 @@ extension WalletsCoordinator: WalletInfoViewControllerDelegate {
     func didPressSave(wallet: WalletInfo, fields: [WalletInfoField], in controller: WalletInfoViewController) {
         keystore.store(object: wallet.info, fields: fields)
         navigationController.popViewController(animated: true)
+    }
+}
+
+extension WalletsCoordinator: MLManagerWalletViewControllerDelegate {
+    func didSelectForInfo(wallet: WalletInfo, account: Account, in controller: MLManagerWalletViewController) {
+showWalletInfo(for: wallet, account: account, sender: controller.view)
+    }
+
+    func didSelect(wallet: WalletInfo, account: Account, in controller: MLManagerWalletViewController) {
+                delegate?.didSelect(wallet: wallet, in: self)
+    }
+
+    func didDeleteAccount(account: WalletInfo, in viewController: MLManagerWalletViewController) {
+        viewController.fetch()
+        //Remove Realm DB
+        let db = RealmConfiguration.configuration(for: account)
+        let fileManager = FileManager.default
+        guard let fileURL = db.fileURL else { return }
+        try? fileManager.removeItem(at: fileURL)
+    }
+
+    func didPresentVC(pushType: MLPushType) {
+//        delegate?.didPresentVC(pushType: pushType)
+    }
+
+    func didVDismissView() {
+//        delegate?.didVDismissView()
+    }
+
+    func didGoSettingVC(pushType: MLPushType) {
+//        delegate?.didGoSettingVC(pushType: pushType)
     }
 }
